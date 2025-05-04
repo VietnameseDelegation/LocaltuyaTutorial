@@ -1,84 +1,82 @@
-# Creating the Virtual Machine
+# Vytvoření virtuálního stroje
 
-Load the appliance image into your virtual machine hypervisor.
+Nahraj appliance image do svého hypervizoru virtuálního stroje.
 
-> **Note:** You are free to assign as many resources as you wish to the VM. Please assign enough based on your add-on needs.
+> **Note:** Můžeš virtuálnímu stroji přidělit libovolné množství prostředků – doporučuje se ale dostatek podle toho, jaké add-ony plánuješ používat.
 
-### Minimum Recommended Assignments:
+### Minimální doporučené prostředky:
 - 2 GB RAM  
 - 32 GB Storage  
 - 2 vCPU  
 
-### Steps:
-1. Create a new virtual machine.
-2. Select type **Linux** and version **Linux 2.6 / 3.x / 4.x (64-bit)**.
-3. Under **Hardware**, select the amount of memory and number of CPUs.  
-   - Enable **EFI**. Home Assistant OS will not boot without EFI enabled.
-4. Under **Hard Disk**, select **Use an existing virtual hard disk file**.  
-   - Select the unzipped VDI file downloaded from:  
+### Postup:
+1. Vytvoř nový virtuální stroj.
+2. Vyber typ **Linux** a verzi **Linux 2.6 / 3.x / 4.x (64-bit)**.
+3. V sekci **Hardware** nastav paměť a počet CPU.  
+   - Zaškrtni **Enable EFI** – pokud nebude EFI zapnuté, HAOS nenabootuje.
+4. V části **Hard Disk** vyber **Use an existing virtual hard disk file**  
+   - Zvol `.vdi` soubor stažený z:  
      [https://www.home-assistant.io/installation/windows](https://www.home-assistant.io/installation/windows)
-5. Go to **Network > Adapter 1**:
-   - Choose **Bridged Adapter** and select your network adapter.  
-   > **Note:** Bridged Adapter only functions over a hardwired Ethernet connection. Wi-Fi is unsupported.
-6. Start the virtual machine.  
-   - Once fully booted, connect via:  
+5. Jdi do **Network > Adapter 1**  
+   - Zvol **Bridged Adapter** a vyber svůj síťový adaptér.  
+   > **Poznámka:** Bridged adapter funguje pouze při připojení přes Ethernet. Wi-Fi není podporována.
+6. Spusť virtuální stroj.  
+   - Po nabootování se připoj přes:  
      - `http://homeassistant.local:8123/`  
      - `http://homeassistant:8123/`
 
 ---
 
-# Downloading Custom Marketplace: HACS
+# Stahování doplňkového tržiště HACS
 
-- HACS Download Page:  
+- Stránka HACS:  
   [https://hacs.xyz/docs/use/download/download/#to-download-hacs](https://hacs.xyz/docs/use/download/download/#to-download-hacs)
 
-- HACS Add-on Installation Link:  
+- Přímý odkaz pro přidání do Home Assistant:  
   [https://my.home-assistant.io/redirect/supervisor_addon/?addon=cb646a50_get&repository_url=https%3A%2F%2Fgithub.com%2Fhacs%2Faddons](https://my.home-assistant.io/redirect/supervisor_addon/?addon=cb646a50_get&repository_url=https%3A%2F%2Fgithub.com%2Fhacs%2Faddons)
 
-### Steps:
-1. Click the add-on repository link above.
-   - Confirm the URL is correct and select **Open link**.
-   - In the "Missing add-on repository" dialog, select **Add**.
-2. In "Get HACS add-on", select **Install**.
-3. Start the add-on.
-4. Navigate to the **add-on logs** and follow the instructions provided.
-5. **Restart** Home Assistant.
-6. Go to **Settings > Devices & services**.
-7. **Clear your browser cache**.
-   > HACS won’t show up in the list unless you clear your browser cache or do a hard refresh.
-8. In the bottom right corner, select **+ Add integration**.
-9. Search for **HACS** and select it.
-10. **Authenticate** the integration.
+### Postup:
+1. Klikni na výše uvedený odkaz pro přidání repozitáře do Home Assistant.
+   - Potvrď URL a klikni **Open link**
+   - V dialogovém okně **Missing add-on repository** klikni na **Add**
+2. V části **Get HACS add-on** klikni na **Install**
+3. Klikni na **Start**
+4. Otevři **Logs** doplňku a následuj instrukce
+5. Restartuj Home Assistant
+6. Jdi do **Settings > Devices & services**
+7. Vymaž cache prohlížeče  
+   > HACS se nezobrazí bez tvrdého obnovení nebo smazání cache
+8. Vpravo dole klikni na **+ Add integration**
+9. Najdi a zvol **HACS**
 
 ---
 
-# Setting Up LocalTuya
+# Stažení a nastavení LocalTuya
 
-- LocalTuya GitHub Repository:  
-  [https://github.com/rospogrigio/localtuya](https://github.com/rospogrigio/localtuya)
+Repozitář na GitHubu:  
+[https://github.com/rospogrigio/localtuya](https://github.com/rospogrigio/localtuya)
 
-> Download LocalTuya and restart the device before proceeding.
+> Stáhni LocalTuya a restartuj Home Assistant, než budeš pokračovat.
 
-### Steps:
-1. Download the **Tuya Smart** app on your mobile device.
-   - Connect your smart device through this app to the network you want it to operate on.
-2. Create an account on:  
+### Postup:
+1. Stáhni si aplikaci **Tuya Smart** do mobilu  
+   - Připoj chytré zařízení přes tuto aplikaci k Wi-Fi síti, kterou chceš použít
+2. Vytvoř účet na:  
    [https://platform.tuya.com/](https://platform.tuya.com/)  
-   - Create a new **Cloud Project**.
-3. In the project **overview**, note your **Client ID** and **Secret**.
-4. In the same menu, go to **Devices > Link App Account**.
-5. Click **Add App Account**.
-6. On your phone in **Tuya Smart**, go to **Me**.
-   - Tap the rectangle icon in the top right corner.
-7. **Scan the QR code** shown on the Tuya developer site.
-8. Write down the **Device ID**.
-9. After confirmation, write down the **User ID**.
-10. Go to the **Home Assistant dashboard**.
-11. In Home Assistant, go to **Settings > Devices & services**.
-12. **Clear your browser cache**.
-13. In the bottom right corner, select **+ Add integration**.
-14. Search for and select **LocalTuya**.
-15. Fill in the app config using your credentials (Client ID, Secret, User ID, Device ID).
-16. Go to configure and select **Add a new device**.
-17. Fill in the form (only the **Device ID** is important).
-18. **You're done!**
+   - Vytvoř nový **cloud project**
+3. V přehledu projektu najdi **Client ID** a **Client Secret** – poznamenej si je
+4. Jdi do sekce **Devices > Link app account**
+5. Klikni na **Add app account**
+6. Otevři aplikaci Tuya Smart, klikni na **Me**, pak vpravo nahoře na ikonu QR
+7. Naskenuj QR kód z platform.tuya.com
+8. Zapiš si **Device ID**
+9. Potvrď a zapiš si **User ID**
+10. Otevři dashboard Home Assistant
+11. Jdi do **Settings > Devices & services**
+12. Znovu smaž cache prohlížeče
+13. Klikni na **+ Add integration**
+14. Najdi a klikni na **LocalTuya**
+15. Vyplň **app config** (Client ID, Secret, User ID, Device ID)
+16. Klikni na **Configure** a zvol **add a new device**
+17. Vyplň formulář – hlavní je správný **Device ID**, ostatní není tak důležité
+18. Hotovo!
